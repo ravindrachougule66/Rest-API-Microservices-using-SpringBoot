@@ -1,0 +1,8 @@
+ package com.demo.controllers;
+
+public class AddResponse {
+	
+	private String msg;
+	private int id;
+
+}

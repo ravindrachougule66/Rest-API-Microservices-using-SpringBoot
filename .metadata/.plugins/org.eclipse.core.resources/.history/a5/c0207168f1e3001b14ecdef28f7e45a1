@@ -1,0 +1,16 @@
+package com.demo.services;
+
+import java.util.HashMap;
+
+import com.demo.beans.Country;
+
+public class CountryService {
+	
+	static HashMap<Integer,Country> countryIdMap; 
+	
+	public CountryService()
+	{
+		
+	}
+
+}

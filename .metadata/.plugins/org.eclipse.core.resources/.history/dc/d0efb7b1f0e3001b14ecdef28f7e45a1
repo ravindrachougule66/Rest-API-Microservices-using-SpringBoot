@@ -1,0 +1,7 @@
+package com.demo.services;
+
+public class CountryService {
+	
+	static HashMap<Interger,country> countryIdMap; 
+
+}

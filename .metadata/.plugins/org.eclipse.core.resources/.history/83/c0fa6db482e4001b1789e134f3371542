@@ -1,0 +1,14 @@
+package com.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.demo.services.CountryService;
+
+@RestController
+public class CountryController {
+	
+	@Autowired
+	CountryService countryService;
+
+}

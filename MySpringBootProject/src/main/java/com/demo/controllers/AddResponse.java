@@ -18,5 +18,4 @@ public class AddResponse {
 		this.id = id;
 	}
 	
-
 }

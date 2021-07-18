@@ -1,10 +1,29 @@
 package com.demo.beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Country")
 public class Country {
 	
+	@Id
+	@Column(name="id")
 	int id;
+	
+	@Column(name="country_name")
 	String countryName;
+	
+	@Column(name="capital")
 	String countryCapital;
+	
+	
+	public Country()
+	{
+		
+	}
 	
 	public Country(int id,String countryName,String countryCapital)
 	{

@@ -4,48 +4,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.demo.beans.Country;
 import com.demo.controllers.AddResponse;
+import com.demo.repositories.CountryRepository;
 
 @Component
+@Service
 public class CountryService {
 	
-	static HashMap<Integer,Country> countryIdMap; 
+	@Autowired
+	CountryRepository countryrep;
 	
-	public CountryService()
+	public List<Country> getAllCountried()
 	{
-		countryIdMap = new HashMap<Integer,Country>();
-		
-		Country India = new Country(1,"India","Delhi");
-		Country USA = new Country(2,"USA","Washington");
-		Country UK = new Country(3,"UK","London");
-		
-		countryIdMap.put(1,India);
-		countryIdMap.put(2, USA);
-		countryIdMap.put(3, UK);
-	}
-	
-	public List getAllCountried()
-	{
-		List countries = new ArrayList(countryIdMap.values());
-		return countries;
+		return countryrep.findAll();
 	}
 	
 	public Country getCountrybyID(int id)
 	{
-		Country country = countryIdMap.get(id);
-		return country;
+		return countryrep.findById(id).get();
 	}
 	
 	public Country getCountrybyName(String countryName)
 	{
+		List <Country> countries = countryrep.findAll();
 		Country country = null;
-		for(int i:countryIdMap.keySet())
+		for(Country con:countries)
 		{
-			if(countryIdMap.get(i).getCountryName().equals(countryName))
-				country=countryIdMap.get(i);
+			if(con.getCountryName().equals(countryName))
+				country=con;
 		}
 		return country;
 	}
@@ -53,31 +44,26 @@ public class CountryService {
 	public Country addCountry(Country country)
 	{
 		country.setId(getMaxId());
-		countryIdMap.put(country.getId(), country);
+		countryrep.save(country);
 		return country;
 	}
 	
-	public static int getMaxId()
+	public int getMaxId()
 	{
-		int max = 0;
-		for(int id:countryIdMap.keySet())
-			if(max<=id)
-				max=id;
-		return max+1;
+		return countryrep.findAll().size()+1;
 	}
 	
 	public Country updateCountry(Country country)
 	{
-		if(country.getId()>0)
-			countryIdMap.put(country.getId(), country);
+		countryrep.save(country);
 		return country;
 	}
 	
 	public AddResponse deleteCountry(int id)
 	{
-		countryIdMap.remove(id);
+		countryrep.deleteById(id);
 		AddResponse res = new AddResponse();
-		res.setMsg("Country deleted.....");
+		res.setMsg("Country Deleted !");
 		res.setId(id);
 		return res;
 	}

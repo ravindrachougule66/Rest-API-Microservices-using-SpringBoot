@@ -63,7 +63,7 @@ public class CountryController {
 		return countryService.addCountry(country);
 	}
 	
-	@PutMapping("/updatecountry")
+	@PutMapping("/updatecountry/{id}")
 	public ResponseEntity<Country> updateCountry(@PathVariable(value="id") int id, @RequestBody Country country)
 	{
 		try
